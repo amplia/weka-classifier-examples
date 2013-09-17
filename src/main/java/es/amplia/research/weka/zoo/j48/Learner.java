@@ -59,10 +59,24 @@ public class Learner extends AbstractLearner{
 			tree.buildClassifier(trainData);
 			logger.info("J48 Classifier is trained");
 			
+		} catch (IOException e) {
+			logger.error("Error IO", e);
+		} catch (Exception e) {
+			logger.error("Problem found when training", e);
+		}
+	}
+	
+	public void eval(String dataType){
+		try {
+			Instances trainData = readData(dataType+"-train");
+			Instances testData = readData(dataType+"-test");
+			trainData.setClassIndex(17);
+			testData.setClassIndex(17);
 			Evaluation eval = new Evaluation(trainData);
-			 eval.evaluateModel(tree, testData);
-			 logger.info(eval.toSummaryString("\nResults\n======\n", false));
-			
+			eval.evaluateModel(tree, testData);
+			logger.info(eval.toSummaryString("\nSummary\n======\n", false));
+			logger.info(eval.toClassDetailsString("\nClass Details\n======\n"));
+			logger.info(eval.toMatrixString("\nConfusion Matrix: false positives and false negatives\n======\n"));			
 		} catch (IOException e) {
 			logger.error("Error IO", e);
 		} catch (Exception e) {

@@ -41,40 +41,29 @@ public class ClassifierTest {
 			nameVal.addElement(animal.name());
 		}
 
+		FastVector booleanVal = new FastVector(2);
+		booleanVal.addElement("false");
+		booleanVal.addElement("true");
+
 		FastVector fvWekaAttributes = new FastVector(18);
-		fvWekaAttributes.addElement(new Attribute("animal", nameVal, 0));
-		fvWekaAttributes
-				.addElement(new Attribute("hair", (FastVector) null, 1));
-		fvWekaAttributes.addElement(new Attribute("feathers",
-				(FastVector) null, 2));
-		fvWekaAttributes
-				.addElement(new Attribute("eggs", (FastVector) null, 3));
-		fvWekaAttributes
-				.addElement(new Attribute("milk", (FastVector) null, 4));
-		fvWekaAttributes.addElement(new Attribute("airborne",
-				(FastVector) null, 5));
-		fvWekaAttributes.addElement(new Attribute("aquatic", (FastVector) null,
-				6));
-		fvWekaAttributes.addElement(new Attribute("predator",
-				(FastVector) null, 7));
-		fvWekaAttributes.addElement(new Attribute("toothed", (FastVector) null,
-				8));
-		fvWekaAttributes.addElement(new Attribute("backbone",
-				(FastVector) null, 9));
-		fvWekaAttributes.addElement(new Attribute("breathes",
-				(FastVector) null, 10));
-		fvWekaAttributes.addElement(new Attribute("venomous",
-				(FastVector) null, 11));
-		fvWekaAttributes
-				.addElement(new Attribute("fins", (FastVector) null, 12));
+		fvWekaAttributes.addElement(new Attribute("animal", 	nameVal, 0));
+		fvWekaAttributes.addElement(new Attribute("hair", 		booleanVal, 1));
+		fvWekaAttributes.addElement(new Attribute("feathers",	booleanVal, 2));
+		fvWekaAttributes.addElement(new Attribute("eggs", 		booleanVal, 3));
+		fvWekaAttributes.addElement(new Attribute("milk", 		booleanVal, 4));
+		fvWekaAttributes.addElement(new Attribute("airborne",	booleanVal, 5));
+		fvWekaAttributes.addElement(new Attribute("aquatic", 	booleanVal,	6));
+		fvWekaAttributes.addElement(new Attribute("predator",	booleanVal, 7));
+		fvWekaAttributes.addElement(new Attribute("toothed", 	booleanVal,	8));
+		fvWekaAttributes.addElement(new Attribute("backbone",	booleanVal, 9));
+		fvWekaAttributes.addElement(new Attribute("breathes",	booleanVal, 10));
+		fvWekaAttributes.addElement(new Attribute("venomous",	booleanVal, 11));
+		fvWekaAttributes.addElement(new Attribute("fins", 		booleanVal, 12));
 		fvWekaAttributes.addElement(new Attribute("legs", 13));
-		fvWekaAttributes
-				.addElement(new Attribute("tail", (FastVector) null, 14));
-		fvWekaAttributes.addElement(new Attribute("domestic",
-				(FastVector) null, 15));
-		fvWekaAttributes.addElement(new Attribute("catsize", (FastVector) null,
-				16));
-		fvWekaAttributes.addElement(new Attribute("type", typeVal, 17));
+		fvWekaAttributes.addElement(new Attribute("tail", 		booleanVal, 14));
+		fvWekaAttributes.addElement(new Attribute("domestic",	booleanVal, 15));
+		fvWekaAttributes.addElement(new Attribute("catsize", 	booleanVal,	16));
+		fvWekaAttributes.addElement(new Attribute("type", 		typeVal, 17));
 
 		this.instances = new Instances("Test relation", fvWekaAttributes, 1);
 		instances.setClassIndex(17);
@@ -87,7 +76,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -99,7 +88,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -111,7 +100,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -123,7 +112,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -135,7 +124,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -147,7 +136,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -159,7 +148,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withDomestic().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -171,7 +160,7 @@ public class ClassifierTest {
 				.withBackbone().withFins().withLegs(0).withTail()
 				.withDomestic().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -183,7 +172,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -195,7 +184,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withDomestic()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -207,7 +196,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -219,7 +208,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(2).withTail()
 				.withDomestic().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -231,7 +220,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -242,7 +231,7 @@ public class ClassifierTest {
 				.withName(Name.clam).withEggs().withPredator().withLegs(0)
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -253,7 +242,7 @@ public class ClassifierTest {
 				.withName(Name.crab).withEggs().withAquatic().withPredator()
 				.withLegs(4).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -264,7 +253,7 @@ public class ClassifierTest {
 				.withName(Name.crayfish).withEggs().withAquatic()
 				.withPredator().withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -276,7 +265,7 @@ public class ClassifierTest {
 				.withPredator().withBackbone().withBreathes().withLegs(2)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -288,7 +277,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -300,7 +289,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -312,7 +301,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withFins()
 				.withLegs(0).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -324,7 +313,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(2).withTail()
 				.withDomestic().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -336,7 +325,7 @@ public class ClassifierTest {
 				.withAquatic().withBackbone().withBreathes().withLegs(2)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -348,7 +337,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -360,7 +349,7 @@ public class ClassifierTest {
 				.withAirbone().withBackbone().withBreathes().withLegs(2)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -371,7 +360,7 @@ public class ClassifierTest {
 				.withName(Name.flea).withEggs().withBreathes().withLegs(6)
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -383,7 +372,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.amphibian.name(), classType);
 	}
@@ -395,7 +384,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(2)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -407,7 +396,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -419,7 +408,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(2)
 				.withDomestic().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -430,7 +419,7 @@ public class ClassifierTest {
 				.withName(Name.gnat).withEggs().withAirbone().withBreathes()
 				.withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -442,7 +431,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withDomestic().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -454,7 +443,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(2).withCatsize()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -466,7 +455,7 @@ public class ClassifierTest {
 				.withAquatic().withPredator().withBackbone().withBreathes()
 				.withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -477,7 +466,7 @@ public class ClassifierTest {
 				.withName(Name.haddock).withEggs().withAquatic().withToothed()
 				.withBackbone().withFins().withLegs(0).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -489,7 +478,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withDomestic().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -500,7 +489,7 @@ public class ClassifierTest {
 				.withName(Name.hare).withHair().withMilk().withToothed()
 				.withBackbone().withBreathes().withLegs(4).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -512,7 +501,7 @@ public class ClassifierTest {
 				.withPredator().withBackbone().withBreathes().withLegs(2)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -524,7 +513,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -536,7 +525,7 @@ public class ClassifierTest {
 				.withBreathes().withVenomous().withLegs(6).withDomestic()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -547,7 +536,7 @@ public class ClassifierTest {
 				.withName(Name.housefly).withHair().withEggs().withAirbone()
 				.withBreathes().withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -558,7 +547,7 @@ public class ClassifierTest {
 				.withName(Name.kiwi).withFeathers().withEggs().withPredator()
 				.withBackbone().withBreathes().withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -569,7 +558,7 @@ public class ClassifierTest {
 				.withName(Name.ladybird).withEggs().withAirbone()
 				.withPredator().withBreathes().withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -580,7 +569,7 @@ public class ClassifierTest {
 				.withName(Name.lark).withFeathers().withEggs().withAirbone()
 				.withBackbone().withBreathes().withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -592,7 +581,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -604,7 +593,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -615,7 +604,7 @@ public class ClassifierTest {
 				.withName(Name.lobster).withEggs().withAquatic().withPredator()
 				.withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -627,7 +616,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -639,7 +628,7 @@ public class ClassifierTest {
 				.withPredator().withToothed().withBackbone().withBreathes()
 				.withLegs(4).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -651,7 +640,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -663,7 +652,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -674,7 +663,7 @@ public class ClassifierTest {
 				.withName(Name.moth).withHair().withEggs().withAirbone()
 				.withBreathes().withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -686,7 +675,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.amphibian.name(), classType);
 	}
@@ -697,7 +686,7 @@ public class ClassifierTest {
 				.withName(Name.octopus).withEggs().withAquatic().withPredator()
 				.withLegs(8).withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -709,7 +698,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -721,7 +710,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -733,7 +722,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(2).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -745,7 +734,7 @@ public class ClassifierTest {
 				.withAirbone().withBackbone().withBreathes().withLegs(2)
 				.withTail().withDomestic().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -757,7 +746,7 @@ public class ClassifierTest {
 				.withPredator().withBackbone().withBreathes().withLegs(2)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -769,7 +758,7 @@ public class ClassifierTest {
 				.withAirbone().withBackbone().withBreathes().withLegs(2)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -781,7 +770,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -793,7 +782,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -805,7 +794,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withVenomous()
 				.withLegs(0).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.reptile.name(), classType);
 	}
@@ -817,7 +806,7 @@ public class ClassifierTest {
 				.withAquatic().withPredator().withBackbone().withBreathes()
 				.withLegs(4).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -829,7 +818,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -841,7 +830,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withDomestic().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -853,7 +842,7 @@ public class ClassifierTest {
 				.withPredator().withToothed().withBackbone().withBreathes()
 				.withFins().withLegs(0).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -865,7 +854,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -877,7 +866,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withDomestic().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -889,7 +878,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -901,7 +890,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(4).withTail()
 				.withDomestic().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -913,7 +902,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(2).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -924,7 +913,7 @@ public class ClassifierTest {
 				.withName(Name.scorpion).withPredator().withBreathes()
 				.withVenomous().withLegs(8).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -935,7 +924,7 @@ public class ClassifierTest {
 				.withName(Name.seahorse).withEggs().withAquatic().withToothed()
 				.withBackbone().withFins().withLegs(0).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -947,7 +936,7 @@ public class ClassifierTest {
 				.withPredator().withToothed().withBackbone().withBreathes()
 				.withFins().withLegs(0).withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -959,7 +948,7 @@ public class ClassifierTest {
 				.withPredator().withToothed().withBackbone().withBreathes()
 				.withFins().withLegs(2).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -971,7 +960,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withVenomous().withLegs(0)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.reptile.name(), classType);
 	}
@@ -982,7 +971,7 @@ public class ClassifierTest {
 				.withName(Name.seawasp).withEggs().withAquatic().withPredator()
 				.withVenomous().withLegs(0).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -994,7 +983,7 @@ public class ClassifierTest {
 				.withAquatic().withPredator().withBackbone().withBreathes()
 				.withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -1006,7 +995,7 @@ public class ClassifierTest {
 				.withAquatic().withPredator().withBackbone().withBreathes()
 				.withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -1018,7 +1007,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(0)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.reptile.name(), classType);
 	}
@@ -1029,7 +1018,7 @@ public class ClassifierTest {
 				.withName(Name.slug).withEggs().withBreathes().withLegs(0)
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -1040,7 +1029,7 @@ public class ClassifierTest {
 				.withName(Name.sole).withEggs().withAquatic().withToothed()
 				.withBackbone().withFins().withLegs(0).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -1051,7 +1040,7 @@ public class ClassifierTest {
 				.withName(Name.sparrow).withFeathers().withEggs().withAirbone()
 				.withBackbone().withBreathes().withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -1062,7 +1051,7 @@ public class ClassifierTest {
 				.withName(Name.squirrel).withHair().withMilk().withToothed()
 				.withBackbone().withBreathes().withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -1073,7 +1062,7 @@ public class ClassifierTest {
 				.withName(Name.starfish).withEggs().withAquatic()
 				.withPredator().withLegs(5).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -1085,7 +1074,7 @@ public class ClassifierTest {
 				.withPredator().withToothed().withBackbone().withVenomous()
 				.withFins().withLegs(0).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -1097,7 +1086,7 @@ public class ClassifierTest {
 				.withAquatic().withBackbone().withBreathes().withLegs(2)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -1108,7 +1097,7 @@ public class ClassifierTest {
 				.withName(Name.termite).withEggs().withBreathes().withLegs(6)
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -1119,7 +1108,7 @@ public class ClassifierTest {
 				.withName(Name.toad).withEggs().withAquatic().withToothed()
 				.withBackbone().withBreathes().withLegs(4).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.amphibian.name(), classType);
 	}
@@ -1130,7 +1119,7 @@ public class ClassifierTest {
 				.withName(Name.tortoise).withEggs().withBackbone()
 				.withBreathes().withLegs(4).withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.reptile.name(), classType);
 	}
@@ -1141,7 +1130,7 @@ public class ClassifierTest {
 				.withName(Name.tuatara).withEggs().withPredator().withToothed()
 				.withBackbone().withBreathes().withLegs(4).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.reptile.name(), classType);
 	}
@@ -1153,7 +1142,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withFins().withLegs(0).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.fish.name(), classType);
 	}
@@ -1165,7 +1154,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(2)
 				.withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -1176,7 +1165,7 @@ public class ClassifierTest {
 				.withName(Name.vole).withHair().withMilk().withToothed()
 				.withBackbone().withBreathes().withLegs(4).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -1188,7 +1177,7 @@ public class ClassifierTest {
 				.withPredator().withBackbone().withBreathes().withLegs(2)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
@@ -1200,7 +1189,7 @@ public class ClassifierTest {
 				.withBackbone().withBreathes().withLegs(2).withTail()
 				.withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -1211,7 +1200,7 @@ public class ClassifierTest {
 				.withName(Name.wasp).withHair().withEggs().withAirbone()
 				.withBreathes().withVenomous().withLegs(6).build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.insect.name(), classType);
 	}
@@ -1223,7 +1212,7 @@ public class ClassifierTest {
 				.withToothed().withBackbone().withBreathes().withLegs(4)
 				.withTail().withCatsize().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.mammal.name(), classType);
 	}
@@ -1234,7 +1223,7 @@ public class ClassifierTest {
 				.withName(Name.worm).withEggs().withBreathes().withLegs(0)
 				.build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.invertebrate.name(), classType);
 	}
@@ -1245,7 +1234,7 @@ public class ClassifierTest {
 				.withName(Name.wren).withFeathers().withEggs().withAirbone()
 				.withBackbone().withBreathes().withLegs(2).withTail().build();
 		int classVal = classifier.classify(instance);
-		String classType = (classVal > 0) ? instances.classAttribute().value(
+		String classType = (classVal >= 0) ? instances.classAttribute().value(
 				classVal) : "";
 		Assert.assertEquals(Animal.Type.bird.name(), classType);
 	}
