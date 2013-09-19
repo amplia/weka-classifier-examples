@@ -1,44 +1,45 @@
-package es.amplia.research.weka.zoo.naivebayes;
+package es.amplia.research.weka.classifier.naivebayes;
 
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.ObjectInputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import es.amplia.research.weka.classifier.AbstractClassifier;
+
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
+import weka.core.Instance;
 import weka.core.Instances;
-import es.amplia.research.weka.zoo.AbstractLearner;
 
 /**
  * 
  * @author cbadenes
- * 
+ *
  */
-public class Learner extends AbstractLearner{
-
-	final static Logger logger = LoggerFactory.getLogger(Learner.class);
-
-	private NaiveBayes tree;
-
-	public static void main(String[] args) {
-		Learner learner = new Learner();
-		learner.learn("zoo");
-		learner.saveModel("zooClassifier.dat");		
-	}	
+public class Classifier extends AbstractClassifier{
 	
-	public void learn(String dataType) {
+	private static final Logger logger = LoggerFactory.getLogger(Classifier.class);
+	
+	public void load(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
+		Object tmp = in.readObject();
+		this.tree = (NaiveBayes) tmp;
+		in.close();
+		logger.info("Loaded model from file: {}",fileName );
+	}
+
+	public void learn(String dataType, int classIndex) {
 
 		try {			
 			Instances trainData = readData(dataType+"-train");
 			Instances testData = readData(dataType+"-test");
 
-			trainData.setClassIndex(17);
-			testData.setClassIndex(17);
+			trainData.setClassIndex(classIndex);
+			testData.setClassIndex(classIndex);
 		    		    
 		    this.tree = new NaiveBayes();
 		    
@@ -68,10 +69,5 @@ public class Learner extends AbstractLearner{
 			logger.error("Problem found when training", e);
 		}
 	}
-
-
-	@Override
-	protected weka.classifiers.Classifier getClassifier() {
-		return this.tree;
-	}
+	
 }

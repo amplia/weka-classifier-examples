@@ -1,5 +1,8 @@
 package es.amplia.research.weka.zoo;
 
+import java_cup.internal_error;
+import weka.core.Attribute;
+import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -10,6 +13,53 @@ import weka.core.Instances;
  */
 public class Animal {
 
+	private static FastVector fvWekaAttributes = new FastVector(18);
+	private static Instances instances;
+	
+	static {
+		// Classify
+		FastVector typeVal = new FastVector(7);
+		typeVal.addElement(Animal.Type.mammal.name());
+		typeVal.addElement(Animal.Type.bird.name());
+		typeVal.addElement(Animal.Type.reptile.name());
+		typeVal.addElement(Animal.Type.fish.name());
+		typeVal.addElement(Animal.Type.amphibian.name());
+		typeVal.addElement(Animal.Type.insect.name());
+		typeVal.addElement(Animal.Type.invertebrate.name());
+
+		FastVector nameVal = new FastVector(100);
+		for (Name animal : Animal.Name.values()) {
+			nameVal.addElement(animal.name());
+		}
+
+		FastVector booleanVal = new FastVector(2);
+		booleanVal.addElement("false");
+		booleanVal.addElement("true");
+
+		fvWekaAttributes.addElement(new Attribute("animal", 	nameVal, 0));
+		fvWekaAttributes.addElement(new Attribute("hair", 		booleanVal, 1));
+		fvWekaAttributes.addElement(new Attribute("feathers",	booleanVal, 2));
+		fvWekaAttributes.addElement(new Attribute("eggs", 		booleanVal, 3));
+		fvWekaAttributes.addElement(new Attribute("milk", 		booleanVal, 4));
+		fvWekaAttributes.addElement(new Attribute("airborne",	booleanVal, 5));
+		fvWekaAttributes.addElement(new Attribute("aquatic", 	booleanVal,	6));
+		fvWekaAttributes.addElement(new Attribute("predator",	booleanVal, 7));
+		fvWekaAttributes.addElement(new Attribute("toothed", 	booleanVal,	8));
+		fvWekaAttributes.addElement(new Attribute("backbone",	booleanVal, 9));
+		fvWekaAttributes.addElement(new Attribute("breathes",	booleanVal, 10));
+		fvWekaAttributes.addElement(new Attribute("venomous",	booleanVal, 11));
+		fvWekaAttributes.addElement(new Attribute("fins", 		booleanVal, 12));
+		fvWekaAttributes.addElement(new Attribute("legs", 13));
+		fvWekaAttributes.addElement(new Attribute("tail", 		booleanVal, 14));
+		fvWekaAttributes.addElement(new Attribute("domestic",	booleanVal, 15));
+		fvWekaAttributes.addElement(new Attribute("catsize", 	booleanVal,	16));
+		fvWekaAttributes.addElement(new Attribute("type", 		typeVal, 17));
+		
+		instances = new Instances("Test relation", fvWekaAttributes, 1);
+		instances.setClassIndex(17);
+	}
+	
+	
 	public enum Name {
 		aardvark, antelope, bass, bear, boar, buffalo, calf, carp, catfish, cavy, cheetah, chicken, chub, clam, crab, crayfish, 
 		crow, deer, dogfish, dolphin, dove, duck, elephant, flamingo, flea, frog, fruitbat, giraffe, girl, gnat, goat, gorilla, 
@@ -21,8 +71,13 @@ public class Animal {
 	};
 	
 	public enum Type {
-		mammal, bird, reptile, fish, amphibian, insect, invertebrate
-	};
+		mammal, bird, reptile, fish, amphibian, insect, invertebrate;
+		
+		public static Type fromVal(int val) {
+			return Type.valueOf(instances.classAttribute().value(val));
+		}
+		
+	};	
 	
 	private Name name;
 	private Boolean hair;
@@ -81,12 +136,7 @@ public class Animal {
 		private Boolean tail		= false;
 		private Boolean domestic	= false;
 		private Boolean catsize		= false;
-		private Instances dataset;
 		
-		public Builder withDataSet(Instances dataset) {
-		  this.dataset = dataset;
-		  return this;
-		}
 		public Builder withName(Name animal) {
 		  this.name = animal;
 		  return this;
@@ -156,9 +206,8 @@ public class Animal {
 		  return this;
 		}
 		public Instance build() {
-			if (dataset == null) throw new RuntimeException("Dataset can not be empty");
 			Instance instance = new Instance(18);	
-			instance.setDataset(dataset);
+			instance.setDataset(instances);
 			instance.setValue(0,	name.name());
 			instance.setValue(1, 	hair.toString());
 			instance.setValue(2, 	feathers.toString());

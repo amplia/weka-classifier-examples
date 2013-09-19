@@ -1,0 +1,26 @@
+   
+@RELATION devices
+
+@ATTRIBUTE manufacturer  {manufacturer1, manufacturer2, manufacturer3, manufacturer4 }
+@ATTRIBUTE model {model1, model2, model3, model4 }
+@ATTRIBUTE firmware {firmware1, firmware2, firmware3, firmware4 }
+@ATTRIBUTE postalCode numeric
+@ATTRIBUTE type { plugin1, plugin2, plugin3, plugin4 }
+
+@DATA
+%
+% Instances (101):
+%
+manufacturer1,model1,firmware1,56473,plugin1
+manufacturer1,model1,firmware1,33473,plugin2
+manufacturer1,model1,firmware2,56473,plugin2
+manufacturer1,model2,firmware1,56473,plugin2
+manufacturer1,model3,firmware2,56473,plugin4
+manufacturer2,model1,firmware1,56473,plugin3
+manufacturer2,model1,firmware4,56473,plugin1
+manufacturer4,model4,firmware1,55742,plugin3
+manufacturer3,model2,firmware1,56473,plugin2
+manufacturer3,model4,firmware1,55742,plugin3
+%
+%
+%

@@ -1,4 +1,4 @@
-package es.amplia.research.weka.mail;
+package es.amplia.research.weka.classifier.mail;
 
 /**
  * A Java class that implements a simple text learner, based on WEKA.
